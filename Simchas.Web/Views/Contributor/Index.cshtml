@@ -1,0 +1,38 @@
+﻿@using Simchas.Data
+@model Simchas.Web.Models.ContributorsViewModel
+
+<div class="page-header">
+    <h1>Contributors</h1>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-primary" href="/Contributor/NewContributor">New Contributor</a>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Deposit</th>
+        <th>Name</th>
+        <th>Cell</th>
+        <th>Balance</th>
+        <th>Always Include</th>
+        <th>Actions</th>
+    </tr>
+    @foreach(ContributorPlus cp in Model.Contributors)
+    {
+        <tr>
+            <td><a class="btn btn-success" href="/Contributor/NewDeposit?ContributorId=@cp.Id">Deposit</a></td>
+            <td>@cp.FirstName @cp.LastName</td>
+            <td>@cp.PhoneNumber</td>
+            <td>@cp.Balance.ToString("C")</td>
+            <td>
+                @if (cp.AlwaysInclude)
+                {
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                }
+            </td>
+            <td><a class="btn btn-danger" href="/contributor/showHistory?ContributorId=@cp.Id">Show History</a></td>
+        </tr>
+    }
+</table>

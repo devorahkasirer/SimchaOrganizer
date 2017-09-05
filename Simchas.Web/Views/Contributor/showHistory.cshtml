@@ -1,0 +1,30 @@
+﻿@using Simchas.Data
+@model Simchas.Web.Models.HistoryViewModel
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <h1>History for @Model.Contributor.FirstName @Model.Contributor.LastName</h1>
+        <h2>Current Balance: @Model.Balance.ToString("C")</h2>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Action</th>
+        <th>Date</th>
+        <th>Amount</th>
+    </tr>
+    @foreach(Transaction t in Model.Transactions)
+    {
+        <tr>
+            <td>@t.Description</td>
+            <td>@t.Date.ToShortDateString()</td>
+            <td>@t.Amount.ToString("C")</td>
+        </tr>
+    }
+</table>
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <a class="btn btn-danger" href="/Contributor/index/">Back to Contributors</a>
+    </div>
+</div>

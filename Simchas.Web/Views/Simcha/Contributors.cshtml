@@ -1,0 +1,53 @@
+﻿@using Simchas.Web.Models
+@model Simchas.Web.Models.UpdateViewModel
+
+<div class="page-header">
+    <h1>Contributors for the @Model.Simcha.Name Simcha</h1>
+</div>
+<form method="post" action="/simcha/updateContributions">
+    <input type="hidden" name="SimchaId" value="@Model.Simcha.Id" />
+    <table class="table table-bordered">
+        <tr>
+            <th>Contribute</th>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Always Include</th>
+            <th>Amount</th>
+        </tr>
+        @{ int i = 0;}
+        @foreach (SimchaContributor sc in Model.SimchaContributorList)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" class="form-control" name="contributing[@i].Include" checked="@sc.Include" value="true" />
+                    <input type="hidden" name="contributing[@i].Include" value="false" />
+                </td>
+                <td>@sc.Name</td>
+                <td>@sc.Balance.ToString("C")</td>
+                <td>
+                    @if (sc.AlwaysInclude)
+                    {
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    }
+                </td>
+                <td>
+                    @if (sc.Amount == 0)
+                    {
+                        <input type="text" class="form-control" name="contributing[@i].Amount" value=5 />
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" name="contributing[@i].Amount" value="@sc.Amount" />
+                    }
+                    <input type="hidden" name="contributing[@i].ContributorId" value="@sc.ContributorId" />
+                </td>
+            </tr>
+            { i++;}
+        }
+    </table>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <button class="btn btn-success">Update</button>
+        </div>
+    </div>
+</form>

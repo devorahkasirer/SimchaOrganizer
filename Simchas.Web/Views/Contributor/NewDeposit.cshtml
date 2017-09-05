@@ -1,0 +1,13 @@
+﻿@using Simchas.Data
+@model Simchas.Web.Models.DepositViewModel
+
+<div class="row">
+    <div class="well col-md-6 col-md-offset-3">
+        <form method="post" action="/contributor/AddDeposit">
+            <input type="hidden" name="ContributorId" value="@Model.ContributorId" />
+            <input type="text" class="form-control" name="deposit" placeholder="Amount" />
+            <br />
+            <button class="btn btn-success">Add</button>
+        </form>
+    </div>
+</div>

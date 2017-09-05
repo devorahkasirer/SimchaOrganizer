@@ -1,0 +1,39 @@
+﻿@using Simchas.Data;
+@model Simchas.Web.Models.SimchasViewModel
+
+@if (Model.NewSimcha != null)
+{
+    <div class="alert well">
+        @Model.NewSimcha.Name Added Successfully
+    </div>
+}
+
+<div class="page-header">
+    <h1>Simchas</h1>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-primary" href="/simcha/NewSimcha">New Simcha</a>
+    </div>
+</div>
+<table class="table table-bordered">
+    <tr>
+        <th>Contributions</th>
+        <th>Simcha Name</th>
+        <th>Contribution Count</th>
+        <th>Total</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+    @foreach(SimchaPlus sp in Model.Simchas)
+    {
+        <tr>
+            <td><a class="btn btn-danger" href="/Simcha/Contributors?SimchaId=@sp.Id">Contributors</a></td>
+            <td>@sp.Name</td>
+            <td>@sp.Contributors / @Model.ContributorsCount</td>
+            <td>@sp.TotalDonations.ToString("C")</td>
+            <td>@sp.Date.ToShortDateString()</td>
+            <td><a class="btn btn-success" href="/Simcha/List?SimchaId=@sp.Id">Contributor List</a></td>
+        </tr>
+    }
+</table>

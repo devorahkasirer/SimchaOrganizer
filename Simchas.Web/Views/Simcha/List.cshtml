@@ -1,0 +1,12 @@
+﻿@using Simchas.Data
+@model Simchas.Web.Models.ContributorsViewModel
+
+<div class="page-header">
+    <h1>Contributor list for the @Model.Simcha.Name Simcha</h1>
+</div>
+<div>
+    @foreach (ContributorPlus cp in Model.Contributors)
+    {
+        <h4>@cp.FirstName @cp.LastName</h4>
+    }
+</div>
