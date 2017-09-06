@@ -113,8 +113,7 @@ namespace Simchas.Web.Controllers
                 };
                 result.Add(cp);
             };
-            result.OrderByDescending(cp => cp.DateCreated);
-            return result;
+            return result.OrderByDescending(cp => cp.DateCreated);
         }
 
     }
